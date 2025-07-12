@@ -6,7 +6,7 @@ This provides an **Electron-like experience for the terminal**.
 
 ## Warning
 
-Honestly this project is very dumb, it may be not very secure, be careful when using it. I would'nt recommend it for production usage. But I believe this still a fun project to play with! Enjoy! :D
+Honestly this project is very dumb, it may be not very secure, be careful when using it. I wouldn't recommend it for production usage. But I believe this still a fun project to play with! Enjoy! :D
 
 ## Features
 
