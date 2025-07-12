@@ -16,14 +16,28 @@ rm -f "${APPIMAGE_NAME}"
 # Create AppDir structure
 mkdir -p "${APP_DIR}"
 
-# Copy Alacritty binary
-if [ ! -f "alacritty/alacritty" ]; then
-    echo "Error: Alacritty binary not found at alacritty/alacritty"
-    echo "Please download and extract Alacritty binary first"
-    exit 1
+# Download and copy Alacritty binary for Linux
+ALACRITTY_DIR="termectron-builds/binaries/linux"
+mkdir -p "$ALACRITTY_DIR"
+
+if [ ! -f "$ALACRITTY_DIR/alacritty" ]; then
+    echo "Downloading Alacritty for Linux..."
+    
+    # Get the latest release download URL (use the same pattern as download-alacritty.sh)
+    DOWNLOAD_URL=$(curl -s https://api.github.com/repos/alacritty/alacritty/releases/latest | grep "browser_download_url.*AppImage" | cut -d '"' -f 4)
+    
+    if [ -z "$DOWNLOAD_URL" ]; then
+        echo "❌ Failed to get Alacritty download URL"
+        exit 1
+    fi
+    
+    echo "Downloading from: $DOWNLOAD_URL"
+    curl -L --progress-bar "$DOWNLOAD_URL" -o "$ALACRITTY_DIR/alacritty"
+    chmod +x "$ALACRITTY_DIR/alacritty"
+    echo "✅ Linux Alacritty binary downloaded"
 fi
 
-cp "alacritty/alacritty" "${APP_DIR}/"
+cp "$ALACRITTY_DIR/alacritty" "${APP_DIR}/"
 
 # Copy app binary
 APP_BINARY="target/release/${APP_NAME}"

@@ -18,14 +18,50 @@ rm -rf "${APP_DIR}"
 mkdir -p "${MACOS_DIR}"
 mkdir -p "${RESOURCES_DIR}"
 
-# Copy Alacritty binary
-if [ ! -f "alacritty/alacritty" ]; then
-    echo "Error: Alacritty binary not found at alacritty/alacritty"
-    echo "Please download and extract Alacritty binary first"
-    exit 1
+# Download and copy Alacritty binary for macOS
+ALACRITTY_DIR="termectron-builds/binaries/macos"
+mkdir -p "$ALACRITTY_DIR"
+
+if [ ! -f "$ALACRITTY_DIR/alacritty" ]; then
+    echo "Downloading Alacritty for macOS..."
+    
+    # Get the latest release download URL (use the same pattern as download-alacritty.sh)
+    DOWNLOAD_URL=$(curl -s https://api.github.com/repos/alacritty/alacritty/releases/latest | grep "browser_download_url.*\.dmg" | cut -d '"' -f 4)
+    
+    if [ -z "$DOWNLOAD_URL" ]; then
+        echo "❌ Failed to get Alacritty download URL"
+        exit 1
+    fi
+    
+    TEMP_FILE="/tmp/Alacritty.dmg"
+    
+    # Download the DMG with progress
+    echo "Downloading from: $DOWNLOAD_URL"
+    curl -L --progress-bar "$DOWNLOAD_URL" -o "$TEMP_FILE"
+    
+    # Mount the DMG
+    echo "Mounting DMG..."
+    MOUNT_POINT=$(hdiutil attach "$TEMP_FILE" -nobrowse | grep "/Volumes" | cut -f3 | tail -1)
+    
+    if [ -z "$MOUNT_POINT" ]; then
+        echo "❌ Failed to mount DMG"
+        rm "$TEMP_FILE"
+        exit 1
+    fi
+    
+    # Extract the Alacritty binary from the app bundle
+    echo "Extracting binary..."
+    cp "$MOUNT_POINT/Alacritty.app/Contents/MacOS/alacritty" "$ALACRITTY_DIR/alacritty"
+    
+    # Unmount and clean up
+    hdiutil detach "$MOUNT_POINT" > /dev/null
+    rm "$TEMP_FILE"
+    
+    chmod +x "$ALACRITTY_DIR/alacritty"
+    echo "✅ macOS Alacritty binary downloaded"
 fi
 
-cp "alacritty/alacritty" "${MACOS_DIR}/Alacritty"
+cp "$ALACRITTY_DIR/alacritty" "${MACOS_DIR}/Alacritty"
 
 # Copy app binary
 APP_BINARY="target/release/${APP_NAME}"

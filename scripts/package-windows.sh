@@ -16,14 +16,28 @@ rm -f "${ZIP_NAME}"
 # Create package directory
 mkdir -p "${APP_DIR}"
 
-# Copy Alacritty binary
-if [ ! -f "alacritty/alacritty.exe" ]; then
-    echo "Error: Alacritty binary not found at alacritty/alacritty.exe"
-    echo "Please download and extract Alacritty binary first"
-    exit 1
+# Download and copy Alacritty binary for Windows
+ALACRITTY_DIR="termectron-builds/binaries/windows"
+mkdir -p "$ALACRITTY_DIR"
+
+if [ ! -f "$ALACRITTY_DIR/alacritty.exe" ]; then
+    echo "Downloading Alacritty for Windows..."
+    
+    # Get the latest release download URL (use the same pattern as download-alacritty.sh)
+    DOWNLOAD_URL=$(curl -s https://api.github.com/repos/alacritty/alacritty/releases/latest | grep "browser_download_url.*portable\.exe" | cut -d '"' -f 4)
+    
+    if [ -z "$DOWNLOAD_URL" ]; then
+        echo "❌ Failed to get Alacritty download URL"
+        exit 1
+    fi
+    
+    # Download the portable exe directly
+    echo "Downloading from: $DOWNLOAD_URL"
+    curl -L --progress-bar "$DOWNLOAD_URL" -o "$ALACRITTY_DIR/alacritty.exe"
+    echo "✅ Windows Alacritty binary downloaded"
 fi
 
-cp "alacritty/alacritty.exe" "${APP_DIR}/"
+cp "$ALACRITTY_DIR/alacritty.exe" "${APP_DIR}/"
 
 # Copy app binary
 APP_BINARY="target/release/${APP_NAME}.exe"
