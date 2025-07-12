@@ -164,7 +164,7 @@ my-terminal-app/
 
 ### Using with TUI Libraries
 
-Termectron works great with Rust TUI libraries:
+Termectron is made to be used with TUI libraries
 
 ```toml
 # Cargo.toml
