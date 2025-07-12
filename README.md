@@ -235,7 +235,7 @@ Current development and testing status:
 - [x] App bundle packaging (`just package-macos`)
 - [x] Icon support (.ico → .icns conversion)
 - [x] Code signing (ad-hoc)
-- [x] Fully tested and working
+- [x] working
 
 ### ⚠️ Windows
 
