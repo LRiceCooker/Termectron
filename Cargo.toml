@@ -1,0 +1,18 @@
+[package]
+name = "termectron"
+version = "0.1.0"
+edition = "2021"
+description = "A minimal framework for building terminal UI applications packaged as cross-platform GUI executables"
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+anyhow = "1.0"
+clap = { version = "4.0", features = ["derive"] }
+serde_yaml = "0.9"
+
+[[bin]]
+name = "termectron"
+path = "src/main.rs"

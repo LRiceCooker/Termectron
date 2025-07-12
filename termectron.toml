@@ -1,0 +1,6 @@
+name = "MyTerminalApp"
+entry = "termectron"
+fullscreen = false
+width = 100
+height = 40
+icon = "assets/icon.ico"
