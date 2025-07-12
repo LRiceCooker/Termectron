@@ -251,7 +251,7 @@ Current development and testing status:
 - [ ] Icon support - Not tested
 - [ ] Testing needed
 
-**Note**: While packaging scripts exist for Windows and Linux, they haven't been tested yet. macOS is the primary development platform and is fully functional.
+**Note**: While packaging scripts exist for Windows and Linux, they haven't been tested yet. macOS is the primary development platform and is functional.
 
 ## Contributing
 
