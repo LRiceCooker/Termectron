@@ -12,7 +12,7 @@ Honestly this project is very dumb, it may be not very secure, be careful when u
 
 - 🦀 **Rust-based**: Build terminal applications in Rust
 - 🖥️ **Cross-platform packaging**: Create native app bundles for macOS, Linux, and Windows
-- ⚡ **Fast**: Uses Alacritty terminal emulator (no browser overhead)
+- ⚡ **Fast**: Uses Alacritty terminal emulator
 - 📦 **Simple configuration**: Single TOML file for app settings
 - 🎨 **Customizable**: Configure window size, fullscreen mode, and icons
 
@@ -27,8 +27,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # Install Just (task runner)
 cargo install just
 
-# Clone or create your Termectron project
-`TODO: add command here`
+# Create your Termectron project
+git clone https://github.com/LRiceCooker/Termectron.git <your project name>
 ```
 
 ### 2. Download Alacritty Binaries
