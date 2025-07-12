@@ -6,7 +6,6 @@ This provides an **Electron-like experience for the terminal**.
 
 <img width="916" height="367" alt="image" src="https://github.com/user-attachments/assets/6d54b957-b92d-40d6-b0f5-28d2706297b3" />
 
-
 ## Warning
 
 Honestly this project is very dumb, it may be not very secure, be careful when using it. I wouldn't recommend it for production usage. But I believe this still a fun project to play with! Enjoy! :D
@@ -230,7 +229,7 @@ chmod +x alacritty/alacritty
 
 Current development and testing status:
 
-### ✅ macOS
+### ✅ macOS (from a macOS system)
 
 - [x] Development mode (`just run`)
 - [x] App bundle packaging (`just package-macos`)
