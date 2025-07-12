@@ -156,7 +156,7 @@ my-terminal-app/
 ├── src/
 │   └── main.rs             # Your Rust application
 ├── assets/                 # Icons and resources
-│   └── icon.png
+│   └── icon.ico
 └── README.md
 ```
 
